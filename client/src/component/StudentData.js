@@ -6,6 +6,7 @@ import {
   GridToolbarContainer,
   GridToolbarExport,
 } from "@mui/x-data-grid";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import {
   Box,
   Button,
@@ -55,39 +56,48 @@ export default function StudentData() {
     { field: "member_email", headerName: "EMail", width: 150 },
     { field: "age", headerName: "Age", width: 150 },
   ];
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoader(true);
-        const res = await axios.get("http://localhost:5001/admin/allstudents");
-        if (res.status == 200) {
-          setLoader(false);
-          //   console.log(res);
-          setStudent(res.data.data);
-        }
-      } catch (err) {
-        setLoader(false);
-      }
-    };
-    fetchData();
-  }, []);
-  const deleteStudent = (row) => {
+  const fetchData = async () => {
     try {
-      const res = studentApis.deleteStudent(row);
+      setLoader(true);
+      const res = await axios.get("http://localhost:5001/admin/allstudents");
+      if (res.status == 200) {
+        setLoader(false);
+        //   console.log(res);
+        setStudent(res.data.data);
+      }
     } catch (err) {
-      console.log(err);
+      setLoader(false);
     }
   };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  const handleSave = (data) => {
-    const response = studentApis.studentApis.newStudent(data);
+  const handleSave = async (data) => {
+    const response = await studentApis.studentApis.newStudent(data);
+    console.log(response);
+    if (response.status == 200) {
+      fetchData();
 
-    handleClose();
-    Swal.fire({
-      title: "Data added successfully",
-      text: "You clicked the button!",
-      icon: "success",
-    });
+      handleClose();
+      Swal.fire({
+        title: "Data added successfully",
+        text: "You clicked the button!",
+        icon: "success",
+      });
+    } else if (response.status == 500) {
+      Swal.fire({
+        title: "Student already exist",
+        text: "Try changing parentId",
+        icon: "failure",
+      });
+    } else {
+      Swal.fire({
+        title: "Something Went Wrong",
+        text: "Try again later",
+        icon: "failure",
+      });
+    }
   };
   const AddModal = () => {
     const style = {
@@ -127,6 +137,29 @@ export default function StudentData() {
         </Box>
       </Modal>
     );
+  };
+  const handleDelete = async (params) => {
+    // due to lack of time calling here only
+    const response = await axios.post(
+      "http://localhost:5001/admin/deletestudent",
+      { studentId: params.member_parent_id },
+      {
+        headers: {
+          "access-control-allow-origin": "*",
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (response.status == 200) {
+      console.log(response);
+      fetchData();
+      Swal.fire({
+        title: "Student Deleted!",
+        text: "Click ok to proceed!",
+        icon: "success",
+      });
+    }
   };
   return (
     <>
@@ -193,8 +226,15 @@ export default function StudentData() {
                     <TableCell align="right">{row.member_name}</TableCell>
                     <TableCell align="right">{row.member_email}</TableCell>
                     <TableCell align="right">{row.age}</TableCell>
-                    <TableCell component="th" scope="row">
-                      <p onClick={() => deleteStudent(row)}> Delete</p>
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      style={{ textAlign: "center" }}
+                    >
+                      <DeleteOutlineIcon
+                        onClick={() => handleDelete(row)}
+                        sx={{ cursor: "pointer" }}
+                      />
                     </TableCell>
                   </TableRow>
                 ))}
