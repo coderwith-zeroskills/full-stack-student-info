@@ -25,7 +25,7 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/admin/allstudents", allstudents);
-app.use("/admin/allstudents", newstudent);
+app.use("/admin/newstudent", newstudent);
 app.use("/admin/singlestudent", singlestudent);
 app.use("/admin/deletestudent", deletestudent);
 

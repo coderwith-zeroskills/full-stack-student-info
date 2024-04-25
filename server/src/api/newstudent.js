@@ -18,15 +18,13 @@ router.post("/", async (req, res) => {
       member_parent_id,
     ]);
 
-    res.json({ message: "Data added successfully" });
+    res.status(200).json({ message: "Data added successfully", status: 200 });
   } catch (error) {
     console.error("Error adding data:", error.detail);
-    res
-      .status(500)
-      .json({
-        error: "An error occurred while adding data",
-        message: error.detail,
-      });
+    res.status(500).json({
+      error: "An error occurred while adding data",
+      message: error.detail,
+    });
   }
 });
 export default router;
