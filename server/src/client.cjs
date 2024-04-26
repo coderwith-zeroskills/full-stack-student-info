@@ -11,6 +11,7 @@ const client = new Client({
 client
   .connect()
   .then(() => {
+    // minor change
     console.log("Connected to PostgreSQL database");
   })
   .catch((err) => {
