@@ -14,12 +14,19 @@ import downloadList from "./api/downloadList.js";
 
 const app = express();
 
+const addRequestTime=(req,res,next)=>{
+  req.requestTime=new Date().toISOString()
+  next()
+}
+ 
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use(addRequestTime)
 
 app.get("/", async (req, res) => {
+  console.log(req.requestTime)
   res.json({
     message: "API Started...",
   });

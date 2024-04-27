@@ -41,7 +41,7 @@ WHAT NOT TO DO:
 #)do not perform complex cal inside callback, careful with large JSON insde callback, not use complex regX inside callback all this will block main thread.
 */
 
-// express is nodeJS framework-which also help design MVC.
+// express is nodeJS framework-which also help design MVC.here it create request-response cycle.In between we can use middleware and can modify the both request and response.
 
 /*
 REST apis: REpresentational State Transfe:a architecture for providing standards between computer systems on the webs, making it easier for system to communicate betweem them.
@@ -59,12 +59,26 @@ Object.assign({id:1},{name:"yurName"})->this will merge both object into single.
 
 /* STATUS CODE:
 200:success,201:created,
+401:not-found
 
 */
 
 /*ROUTE parameter:are named URL segments that are used to capture the values spceifiec at their position.
 example:
 GET:api/v1/movies/id
-app.get('/api/v1/movies/:id',(req,res)=>{console.log(req.params)})
+app.get('/api/v1/movies/:id/:optional?',(req,res)=>{console.log(req.params)})
+
+*/
+
+/* UPDATE Resources: PUT(entire object),PATCH(only updated object)
+DELETE:
+*/
+
+/*MIDDLEWARE:
+middleware has req,res,next.
+custom-middleware:in code
+mounting routes:already doing.
+
+
 
 */

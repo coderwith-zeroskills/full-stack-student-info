@@ -1,15 +1,7 @@
 import express from "express";
 import client from "../client.cjs";
+import { getAllStudents } from "../controller/allstudentController.js";
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  client.query("SELECT * FROM students", (err, result) => {
-    if (err) {
-      console.error("Error executing query", err);
-    } else {
-      res.status(200).json({ status:"success",data: result.rows });
-    }
-  });
-  //console.log(res);
-});
+router.get("/", getAllStudents);
 export default router;
