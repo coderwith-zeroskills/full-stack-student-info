@@ -59,7 +59,7 @@ Object.assign({id:1},{name:"yurName"})->this will merge both object into single.
 
 /* STATUS CODE:
 200:success,201:created,
-401:not-found
+400-bad equest,401:not-found
 
 */
 
@@ -74,10 +74,14 @@ app.get('/api/v1/movies/:id/:optional?',(req,res)=>{console.log(req.params)})
 DELETE:
 */
 
+// example route: router.route('/:id').get(respectiveFunction).post().put()
+                                        
+
 /*MIDDLEWARE:
 middleware has req,res,next.
 custom-middleware:in code
 mounting routes:already doing.
+param middleware is imp: router.param(id,(req,res,next,val)=>{}):example, it was used to check if ID exists and if does next called else return res with status code.
 
 
 

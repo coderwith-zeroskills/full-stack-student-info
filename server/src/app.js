@@ -22,7 +22,7 @@ const addRequestTime=(req,res,next)=>{
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(cors());
-app.use(express.json());
+app.use(express.json());//we called here coz it will return the function
 app.use(addRequestTime)
 
 app.get("/", async (req, res) => {
