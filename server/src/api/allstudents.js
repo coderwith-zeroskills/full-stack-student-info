@@ -7,8 +7,7 @@ router.get("/", (req, res) => {
     if (err) {
       console.error("Error executing query", err);
     } else {
-      res.json({ data: result.rows });
-      // console.log("Query result:", result.rows);
+      res.status(200).json({ status:"success",data: result.rows });
     }
   });
   //console.log(res);

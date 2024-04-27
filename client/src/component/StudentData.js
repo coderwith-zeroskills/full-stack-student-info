@@ -140,57 +140,60 @@ export default function StudentData() {
   };
   const handleDelete = async (params) => {
     // due to lack of time calling here only
-     // Display confirmation dialog using SweetAlert
-  const confirmation = await Swal.fire({
-    title: 'Are you sure?',
-    text: 'Once deleted, this student will be permanently removed!',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
-  });
+    // Display confirmation dialog using SweetAlert
+    const confirmation = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'Once deleted, this student will be permanently removed!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    });
 
-  if (confirmation.isConfirmed) {
-    try {
-      const response = await axios.post(
-        "http://localhost:5001/admin/deletestudent",
-        { studentId: params.member_parent_id },
-        {
-          headers: {
-            "access-control-allow-origin": "*",
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
+    if (confirmation.isConfirmed) {
+      try {
+        const response = await axios.post(
+          "http://localhost:5001/admin/deletestudent",
+          { studentId: params.member_parent_id },
+          {
+            headers: {
+              "access-control-allow-origin": "*",
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          console.log(response);
+          fetchData();
+          Swal.fire({
+            title: "Student Deleted!",
+            text: "Student has been successfully deleted.",
+            icon: "success",
+          });
         }
-      );
-
-      if (response.status === 200) {
-        console.log(response);
-        fetchData();
+      } catch (error) {
+        console.error("Error deleting student:", error);
         Swal.fire({
-          title: "Student Deleted!",
-          text: "Student has been successfully deleted.",
-          icon: "success",
+          title: "Error",
+          text: "Failed to delete student. Please try again.",
+          icon: "error",
         });
       }
-    } catch (error) {
-      console.error("Error deleting student:", error);
+    } else {
+      // Handle the case where user cancels deletion
       Swal.fire({
-        title: "Error",
-        text: "Failed to delete student. Please try again.",
-        icon: "error",
+        title: "Cancelled",
+        text: "Deletion cancelled.",
+        icon: "info",
       });
     }
-  } else {
-    // Handle the case where user cancels deletion
-    Swal.fire({
-      title: "Cancelled",
-      text: "Deletion cancelled.",
-      icon: "info",
-    });
-  }
   };
+  const handleDownload = () => {
+
+  }
   return (
     <>
       <Box m="10px">
@@ -227,6 +230,7 @@ export default function StudentData() {
           }}
         >
           <Stack spacing={2}>
+            <Button onClick={handleDownload}>Download Student List</Button>
             <Item>All Members</Item>
             <Item displayFlex={true}>
               <TextField id="QA-basic" label="QA" variant="outlined" />

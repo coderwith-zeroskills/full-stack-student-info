@@ -9,6 +9,7 @@ import allstudents from "./api/allstudents.js";
 import newstudent from "./api/newstudent.js";
 import singlestudent from "./api/singlestudent.js";
 import deletestudent from "./api/deletestudent.js";
+import downloadList from "./api/downloadList.js";
 // require("dotenv").config();
 
 const app = express();
@@ -28,6 +29,7 @@ app.use("/admin/allstudents", allstudents);
 app.use("/admin/newstudent", newstudent);
 app.use("/admin/singlestudent", singlestudent);
 app.use("/admin/deletestudent", deletestudent);
+app.use("/admin/download",downloadList)
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
