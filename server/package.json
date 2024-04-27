@@ -12,17 +12,13 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@turf/helpers": "^6.5.0",
-    "@types/mapbox-gl": "^2.7.20",
+    "express": "^4.18.2",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "epanet-js": "^0.7.0",
-    "express": "^4.18.2",
     "helmet": "^7.1.0",
-    "mapbox-gl": "^3.1.2",
-    "morgan": "^1.10.0",
+    "morgan": "^1.10.0",   
     "pg": "^8.11.5",
-    "react-map-gl": "^7.1.7"
+   
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

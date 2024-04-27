@@ -24,7 +24,7 @@ const newStudent = async(req, res) => {
     
         res.status(200).json({ message: "Data added successfully", status: 200 });
       } catch (error) {
-        console.error("Error adding data:", error.detail);
+        return res.json({status:"failure",message:'Something went wrong!'})
       }
 };
 
