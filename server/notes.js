@@ -82,6 +82,15 @@ middleware has req,res,next.
 custom-middleware:in code
 mounting routes:already doing.
 param middleware is imp: router.param(id,(req,res,next,val)=>{}):example, it was used to check if ID exists and if does next called else return res with status code.
+*/
+
+
+/*environment variable:
+app.get('env');
+process.env():bunch of env var set by nodeJS
+before runnong in development we set the env variable NODE_ENV-> SET x=100
+above is important as we can trigger different database on the basis of development or testing.
+error middleware also using NODE_ENV variable for production
 
 
 
