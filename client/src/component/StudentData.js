@@ -74,28 +74,37 @@ export default function StudentData() {
   }, []);
 
   const handleSave = async (data) => {
-    const response = await studentApis.studentApis.newStudent(data);
-    console.log(response);
-    if (response.status == 200) {
-      fetchData();
-
-      handleClose();
-      Swal.fire({
-        title: "Data added successfully",
-        text: "You clicked the button!",
-        icon: "success",
-      });
-    } else if (response.status == 500) {
-      Swal.fire({
-        title: "Student already exist",
-        text: "Try changing parentId",
-        icon: "failure",
-      });
-    } else {
+    try {
+      const response = await studentApis.studentApis.newStudent(data);
+      console.log(response);
+  
+      if (response.status === 201) {
+        fetchData();
+        handleClose();
+        Swal.fire({
+          title: "Data added successfully",
+          text: "You clicked the button!",
+          icon: "success",
+        });
+      } else if (response.status === 409) {
+        Swal.fire({
+          title: "Student already exists",
+          text: "Try changing parent ID or email",
+          icon: "error",
+        });
+      } else {
+        Swal.fire({
+          title: "Something Went Wrong",
+          text: "Try again later",
+          icon: "error",
+        });
+      }
+    } catch (error) {
+      console.error("Error adding student:", error);
       Swal.fire({
         title: "Something Went Wrong",
         text: "Try again later",
-        icon: "failure",
+        icon: "error",
       });
     }
   };
