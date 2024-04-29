@@ -38,7 +38,6 @@ export default function StudentData() {
   const [student, setStudent] = useState([]);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [loader, setLoader] = useState(false);
 
   const Item = styled(Paper)(({ theme, customProp }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -58,16 +57,12 @@ export default function StudentData() {
   ];
   const fetchData = async () => {
     try {
-      setLoader(true);
       const res = await axios.get("http://localhost:5001/admin/allstudents");
       if (res.status == 200) {
-        setLoader(false);
         //   console.log(res);
         setStudent(res.data.data);
       }
-    } catch (err) {
-      setLoader(false);
-    }
+    } catch (err) {}
   };
   useEffect(() => {
     fetchData();
@@ -77,7 +72,7 @@ export default function StudentData() {
     try {
       const response = await studentApis.studentApis.newStudent(data);
       console.log(response);
-  
+
       if (response.status === 201) {
         fetchData();
         handleClose();
@@ -151,13 +146,13 @@ export default function StudentData() {
     // due to lack of time calling here only
     // Display confirmation dialog using SweetAlert
     const confirmation = await Swal.fire({
-      title: 'Are you sure?',
-      text: 'Once deleted, this student will be permanently removed!',
-      icon: 'warning',
+      title: "Are you sure?",
+      text: "Once deleted, this student will be permanently removed!",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
     });
 
     if (confirmation.isConfirmed) {
@@ -200,9 +195,7 @@ export default function StudentData() {
       });
     }
   };
-  const handleDownload = () => {
-
-  }
+  const handleDownload = () => {};
   return (
     <>
       <Box m="10px">
