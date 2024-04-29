@@ -57,6 +57,7 @@ export default function StudentData() {
   ];
   const fetchData = async () => {
     try {
+      // will move this to api folder with URL in env file
       const res = await axios.get("http://localhost:5001/admin/allstudents");
       if (res.status == 200) {
         //   console.log(res);
