@@ -49,12 +49,7 @@ export default function StudentData() {
     justifyContent: "space-between",
   }));
 
-  const columns = [
-    { field: "member_parent_id", headerName: "Id", width: 200 },
-    { field: "member_name", headerName: "Name", width: 150 },
-    { field: "member_email", headerName: "EMail", width: 150 },
-    { field: "age", headerName: "Age", width: 150 },
-  ];
+ 
   const fetchData = async () => {
     try {
       // will move this to api folder with URL in env file
