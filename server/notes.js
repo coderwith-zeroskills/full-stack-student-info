@@ -8,7 +8,7 @@ you can create your custom event alike on event usng new event.EventEmitter();
 on event on u recieve params in functions, is passed whle emtting the event
 */
 
-/* STREAMS:a imp topic
+/* STREAMS:a imp topic:this need to be studies
 readFile() and writeFile() does operateion at once.
 using stream we does it piece by piece.
 types:Readable,Writable,Duplex,Transform stream.
