@@ -11,6 +11,7 @@ on event on u recieve params in functions, is passed whle emtting the event
 /* STREAMS:a imp topic:this need to be studies
 readFile() and writeFile() does operateion at once.
 using stream we does it piece by piece.
+but how to stream audio?
 types:Readable,Writable,Duplex,Transform stream.
 reading: const rs=fs.createReadStream("filepath");
 rs.on('data',(chunk)=>{})
