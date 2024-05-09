@@ -20,8 +20,8 @@ we use pipe method for handling backpressure--when write is slow than read.
 
 /*
 nodeJS: LIBUV->event-driven and thread pool
-/will implement emscripten here
-every process has a thread and in other language has multi-thread, hread where code is executed.
+
+every day process has a thread and in other language has multi-thread, hread where code is executed.
 */
 
 /* nodeJS running process:
